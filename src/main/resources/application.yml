@@ -2,9 +2,9 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&SSL=false
-    username:
-    password:
-#需要修改
+    username: root
+    password: 1905wc
+
   jpa:
     database: mysql
     show-sql: true
@@ -15,8 +15,8 @@ spring:
 
   mail:
     host: smtp.qq.com
-    username: @qq.com
-    password:
+    username: 792053282@qq.com
+    password: rsoouzymgqvlbajp
     default-encoding: UTF-8
     properties:
       mail:
@@ -27,7 +27,7 @@ spring:
             required: true
 
 mybatis:
-  type-aliases-package: com.itqf.domain
+  type-aliases-package: com.qf.domain
   mapper-locations: classpath:mapper/*Mapper.xml
 
 
