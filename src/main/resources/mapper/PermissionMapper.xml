@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.dao.PermissionRepository">
+  <resultMap id="BaseResultMap" type="com.qf.domain.Permission">
+    <id column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+  </resultMap>
+  <!--
+  List<Permission> selectPermissionByAdminName(@Param("aname") String aname);
+  -->
+  <select id="selectPermissionByAdminName" resultMap="BaseResultMap">
+    SELECT p.* FROM
+    admin a,
+	aptable ap,
+	permission p
+	WHERE a.aid=ap.aid and ap.pid=p.pid and a.aname=#{aname}
+  </select>
+</mapper>
