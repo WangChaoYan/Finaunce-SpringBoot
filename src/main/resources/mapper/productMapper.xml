@@ -5,19 +5,19 @@
 
 <mapper namespace="com.itqf.dao.ProductMapper">
     
-    <select id="selectProductById" resultType="com.itqf.domain.Product" parameterType="Integer">
+    <select id="selectProductById" resultType="com.qf.domain.Product" parameterType="Integer">
 
         select * from product where pid=#{pid}
 
     </select>
 
-    <select id="selectProduct" resultType="com.itqf.domain.Product">
+    <select id="selectProduct" resultType="com.qf.domain.Product">
 
         select * from product
 
     </select>
 
-    <select id="selectProductByStatus" resultType="com.itqf.domain.Product" parameterType="Integer">
+    <select id="selectProductByStatus" resultType="com.qf.domain.Product" parameterType="Integer">
 
         select * from product where status=#{status}
 
