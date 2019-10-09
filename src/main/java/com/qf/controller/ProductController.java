@@ -7,6 +7,7 @@ import com.qf.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -50,8 +51,13 @@ public class ProductController {
 
     @RequestMapping("/insertDingDan")
     public String insertDingDan(@RequestBody DingDan dingDan){
-
+        dingDan.setTime(new Date());
         return dingDanService.insertDingDan(dingDan)==0?"购买失败":"购买成功";
+    }
+    @RequestMapping(value = "/selectDingDanByUname",method = RequestMethod.POST)
+    public List<DingDan> selectDingDanByUname(@RequestParam("uname")String  uname){
+
+        return dingDanService.selectDingDanByUname(uname);
     }
 
 
