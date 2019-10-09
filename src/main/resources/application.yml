@@ -1,8 +1,7 @@
-
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://47.103.219.4:3306/finanuce?useUnicode=true&characterEncoding=utf8&SSL=false
+    url: jdbc:mysql://47.103.219.4/finanuce?useUnicode=true&characterEncoding=utf8&SSL=false
     username: root
     password: 123456
 
