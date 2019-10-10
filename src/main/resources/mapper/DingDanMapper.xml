@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qf.dao.DingDanMapper">
+
+<insert id="insertNew"  parameterType="com.qf.domain.DingDan" >
+
+    insert into dingdan(uname,pname,time,money,status)
+    values(#{uname},#{pname},#{time},#{money},#{status})
+
+</insert>
+
+    <select id="selectDingDanByUname" parameterType="String" resultType="com.qf.domain.DingDan">
+
+        select * from dingdan where uname=#{uname}
+
+    </select>
+
+</mapper>
