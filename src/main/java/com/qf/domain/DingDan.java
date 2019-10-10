@@ -1,5 +1,6 @@
 package com.qf.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -16,6 +17,7 @@ public class DingDan {
     private Integer id;
     private String uname;
     private String pname;
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date time;
     private Long money;
     private Integer status;
