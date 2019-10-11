@@ -68,6 +68,11 @@
             <version>3.3.49.ALL</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+        </dependency>
         <!--七牛-->
         <dependency>
             <groupId>com.qiniu</groupId>

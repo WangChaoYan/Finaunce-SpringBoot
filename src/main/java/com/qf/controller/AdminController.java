@@ -4,6 +4,7 @@ import com.qf.domain.Admin;
 import com.qf.service.AdminService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author HeXiaoH
@@ -34,6 +37,8 @@ public class AdminController {
             try {
                 subject.login(token);
                 if(subject.isAuthenticated()){
+                    Session session = subject.getSession();
+                    session.setAttribute("admin",admin);
                     return "success";
                 }else {
                     return "fail";
@@ -43,5 +48,12 @@ public class AdminController {
             }
         }
         return "值不能为空";
+    }
+
+    @RequestMapping(value = "/getAdminSession",method = RequestMethod.POST)
+    public String getAdminSession(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Admin admin = (Admin) session.getAttribute("admin");
+        return admin.getAname();
     }
 }
