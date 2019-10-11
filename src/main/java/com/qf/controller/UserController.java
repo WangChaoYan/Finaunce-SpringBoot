@@ -5,6 +5,7 @@ import com.qf.domain.UserCode;
 import com.qf.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,6 @@ import javax.servlet.http.HttpSession;
 
 /**
  * @author HeXiaoH
- * @date 2019/10/2 14:35
  */
 @RestController
 public class UserController {
@@ -69,7 +69,7 @@ public class UserController {
      * 登陆
      */
     @RequestMapping(value = "/loginVal",method = RequestMethod.POST)
-    public String loginVal(@RequestBody User user){
+    public String loginVal(@RequestBody User user,HttpSession session){
         String username=user.getUname();
         String password=user.getUpassword();
         if(username!=""&&username!=null&&password!=""&&password!=null){
@@ -79,6 +79,7 @@ public class UserController {
             try {
                 subject.login(token);
                 if(subject.isAuthenticated()){
+                    session.setAttribute("username",username);
                     return "success";
                 }else {
                     return "fail";
@@ -88,5 +89,32 @@ public class UserController {
             }
         }
         return "值不能为空";
+    }
+
+
+    /**
+     *
+     * @param session
+     * @return获取用户名
+     */
+    @RequestMapping(value = "/getUserSession",method = RequestMethod.POST)
+    public String getUserSession(HttpSession session){
+        return (String)session.getAttribute("username");
+    }
+
+    /**
+     *
+     * @param session
+     * @return退出登陆
+     */
+    @RequestMapping(value = "/userLoginOut",method = RequestMethod.POST)
+    public String userLoginOut(HttpSession session){
+        session.invalidate();  //使session失效
+        try {
+            return "ok";
+        }catch (Exception e){
+            System.out.println("session失效");
+        }
+        return "fail";
     }
 }
