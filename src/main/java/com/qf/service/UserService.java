@@ -22,4 +22,8 @@ public interface UserService {
      * 注册用户
      */
     String registered(User user);
+    /*
+    根据名字查用户
+     */
+    User findUser(String uname);
 }

@@ -16,11 +16,11 @@ import java.util.Random;
  */
 @Component
 public class AlipayUtils {
-
+    public String trade_no;
     public String pay(int limits,String pname) throws AlipayApiException {
         AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl,AlipayConfig.app_id,AlipayConfig.merchant_private_key,"json","utf-8",AlipayConfig.alipay_public_key,"RSA2");
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();//创建API对应的request
-        String trade_no=tradeno();
+        trade_no=tradeno();
         alipayRequest.setBizContent("{" +
                 "    \"out_trade_no\":\""+trade_no+"\"," +
                 "    \"product_code\":\"FAST_INSTANT_TRADE_PAY\"," +
@@ -32,13 +32,14 @@ public class AlipayUtils {
                 "    \"sys_service_provider_id\":\"2088511833207846\"" +
                 "    }"+
                 "  }");
+        alipayRequest.setReturnUrl(AlipayConfig.return_url);
         String form="";
 
         form = alipayClient.pageExecute(alipayRequest).getBody(); //调用SDK生成表单        System.out.println(response.getBody());
         return form;
     }
 
-    private String tradeno() {
+    private   String tradeno() {
         StringBuffer stringBuffer=new StringBuffer();
         Random random=new Random();
         for(int i=0;i<16;i++){

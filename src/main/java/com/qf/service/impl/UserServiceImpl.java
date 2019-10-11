@@ -86,4 +86,9 @@ public class UserServiceImpl implements UserService {
             return "fail";
         }
     }
+
+    @Override
+    public User findUser(String uname) {
+        return userRepository.findByUname(uname);
+    }
 }

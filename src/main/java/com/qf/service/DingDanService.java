@@ -1,6 +1,7 @@
 package com.qf.service;
 
 import com.qf.domain.DingDan;
+import com.qf.domain.Order;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface DingDanService {
     int insertDingDan(DingDan dingDan);
 
     List<DingDan> selectDingDanByUname(String uname);
+
+
 }
