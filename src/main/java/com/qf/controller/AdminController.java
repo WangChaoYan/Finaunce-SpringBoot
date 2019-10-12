@@ -1,5 +1,7 @@
 package com.qf.controller;
 
+import com.qf.common.LoginType;
+import com.qf.common.UserToken;
 import com.qf.domain.Admin;
 import com.qf.service.AdminService;
 import org.apache.shiro.SecurityUtils;
@@ -33,7 +35,8 @@ public class AdminController {
         String apassword = admin.getApassword();
         if(aname!=""&&aname!=null&&apassword!=""&&apassword!=null){
             Subject subject = SecurityUtils.getSubject();
-            UsernamePasswordToken token = new UsernamePasswordToken(aname,apassword);
+            //调用安全框架的登陆方法
+            UserToken token = new UserToken(aname,apassword,LoginType.ADMIN.toString());
             try {
                 subject.login(token);
                 if(subject.isAuthenticated()){

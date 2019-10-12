@@ -1,5 +1,7 @@
 package com.qf.controller;
 
+import com.qf.common.LoginType;
+import com.qf.common.UserToken;
 import com.qf.domain.User;
 import com.qf.domain.UserCode;
 import com.qf.service.UserService;
@@ -73,9 +75,9 @@ public class UserController {
         String username=user.getUname();
         String password=user.getUpassword();
         if(username!=""&&username!=null&&password!=""&&password!=null){
-            System.out.println(username+"============================================="+password);
             Subject subject = SecurityUtils.getSubject();
-            UsernamePasswordToken token = new UsernamePasswordToken(username,password);
+            //调用安全认证框架的登陆方法
+            UserToken token = new UserToken(username,password,LoginType.USER.toString());
             try {
                 subject.login(token);
                 if(subject.isAuthenticated()){

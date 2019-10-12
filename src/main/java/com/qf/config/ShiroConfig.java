@@ -1,8 +1,12 @@
 package com.qf.config;
 
+import com.qf.common.UserModularRealmAuthenticator;
 import com.qf.shiro.AdminRealm;
 import com.qf.shiro.UserRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy;
+import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
+import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -10,6 +14,10 @@ import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreato
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Configuration
@@ -36,12 +44,22 @@ public class ShiroConfig {
         return shiroFilterFactoryBean;
     }
 
-    //    配置安全管理器（注入Realm对象）
+
+    /**
+     * 配置安全管理器（注入Realm对象）
+     */
     @Bean(name = "defaultWebSecurityManager")
     public DefaultWebSecurityManager defaultWebSecurityManager(@Qualifier("userRealm") UserRealm userRealm,@Qualifier("adminRealm") AdminRealm adminRealm){
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
-        defaultWebSecurityManager.setRealm(userRealm);
-        defaultWebSecurityManager.setRealm(adminRealm);
+        //多realm必须在前
+        defaultWebSecurityManager.setAuthenticator(modularRealmAuthenticator());
+        //添加多个realm
+        List<Realm> realms = new ArrayList<>();
+        realms.add(userRealm);
+        realms.add(adminRealm);
+
+        defaultWebSecurityManager.setRealms(realms);
+
         return defaultWebSecurityManager;
     }
 
@@ -76,6 +94,17 @@ public class ShiroConfig {
         adminRealm.setCredentialsMatcher(hashedCredentialsMatcher);
         return adminRealm;
     }
+
+    /**
+     * 系统自带的Realm管理，主要针对多realm
+     * */
+    @Bean
+    public ModularRealmAuthenticator modularRealmAuthenticator(){
+        //自己重写的ModularRealmAuthenticator
+        UserModularRealmAuthenticator modularRealmAuthenticator = new UserModularRealmAuthenticator();
+        modularRealmAuthenticator.setAuthenticationStrategy(new AtLeastOneSuccessfulStrategy());
+        return modularRealmAuthenticator;
+    }
     /**
      * 开启Shiro注解(如@RequiresRoles,@RequiresPermissions),
      * 需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全逻辑验证
@@ -96,5 +125,4 @@ public class ShiroConfig {
         authorizationAttributeSourceAdvisor.setSecurityManager(defaultWebSecurityManager);
         return authorizationAttributeSourceAdvisor;
     }
-
 }

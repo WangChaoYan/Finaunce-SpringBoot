@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.apache.shiro.subject.Subject;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -28,7 +28,7 @@ import java.util.concurrent.Executors;
 public class AlipayController{
 @Autowired
     private AlipayUtils alipayUtils;
-@Autowired
+@Resource
     private OrderRepository orderRepository;
 @Autowired
     private UserService userService;
@@ -45,7 +45,7 @@ public class AlipayController{
         String principal=(String)subject.getPrincipal();
         User user=userService.findUser(principal);
         String tradeno=alipayUtils.trade_no;
-        order.setUid(1);
+        order.setUid(user.getUid());
         order.setTradacount(Float.valueOf(product.getLimits()));
         order.setTradcname(product.getPname());
         order.setTradstatus("未支付");
