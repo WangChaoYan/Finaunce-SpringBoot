@@ -5,6 +5,17 @@
 
 <mapper namespace="com.qf.dao.DingDanMapper">
 
+    <resultMap type="com.qf.domain.Order" id="OrderMap">
+        <id column="orid" property="orid"/>
+        <result column="trad_acount" property="tradacount"/>
+        <result column="trad_status" property="tradstatus"/>
+        <result column="trad_num" property="tradnum"/>
+        <result column="uid" property="uid"/>
+        <result column="trad_cname" property="tradcname"/>
+        <result column="trad_time" property="tradtime"/>
+    </resultMap>
+
+
 <insert id="insertNew"  parameterType="com.qf.domain.DingDan" >
 
     insert into dingdan(uname,pname,time,money,status)
@@ -12,9 +23,9 @@
 
 </insert>
 
-    <select id="selectDingDanByUname" parameterType="String" resultType="com.qf.domain.DingDan">
+    <select id="selectDingDanByUname" parameterType="Integer" resultMap="OrderMap">
 
-        select * from dingdan where uname=#{uname}
+        select * from course_order where uid=#{uid}
 
     </select>
 

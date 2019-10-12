@@ -1,7 +1,10 @@
 package com.qf.controller;
 
+import com.qf.dao.UserRepository;
 import com.qf.domain.DingDan;
+import com.qf.domain.Order;
 import com.qf.domain.Product;
+import com.qf.domain.User;
 import com.qf.service.DingDanService;
 import com.qf.service.ProductService;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +27,9 @@ public class ProductController {
 
     @Resource
     private DingDanService dingDanService;
+
+    @Resource
+    private UserRepository userRepository;
 
     @RequestMapping("/selectAll")
     public List<Product> selectProduct(){
@@ -56,9 +62,12 @@ public class ProductController {
         return dingDanService.insertDingDan(dingDan)==0?"购买失败":"购买成功";
     }
     @RequestMapping(value = "/selectDingDanByUname",method = RequestMethod.POST)
-    public List<DingDan> selectDingDanByUname(@RequestParam("uname")String  uname){
+    public List<Order> selectDingDanByUname(@RequestParam("uname")String  uname){
 
-        return dingDanService.selectDingDanByUname(uname);
+        User user=userRepository.findByUname(uname);
+        System.out.println(user.getUid());
+
+        return dingDanService.selectDingDanByUname(user.getUid());
     }
 
 

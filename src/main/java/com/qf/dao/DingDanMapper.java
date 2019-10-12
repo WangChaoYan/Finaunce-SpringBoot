@@ -1,6 +1,7 @@
 package com.qf.dao;
 
 import com.qf.domain.DingDan;
+import com.qf.domain.Order;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -15,5 +16,5 @@ public interface DingDanMapper {
 
    int insertNew(DingDan dingDan);
 
-   List<DingDan> selectDingDanByUname(String uname);
+   List<Order> selectDingDanByUname(Integer uid);
 }

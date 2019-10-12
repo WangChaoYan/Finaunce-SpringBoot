@@ -2,6 +2,7 @@ package com.qf.service.impl;
 
 import com.qf.dao.DingDanMapper;
 import com.qf.domain.DingDan;
+import com.qf.domain.Order;
 import com.qf.service.DingDanService;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class DingDanServiceImpl implements DingDanService {
     }
 
     @Override
-    public List<DingDan> selectDingDanByUname(String uname) {
-        return dingDanMapper.selectDingDanByUname(uname);
+    public List<Order> selectDingDanByUname(Integer uid) {
+        return dingDanMapper.selectDingDanByUname(uid);
     }
 }

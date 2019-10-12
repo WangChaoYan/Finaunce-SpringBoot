@@ -14,7 +14,7 @@ public interface DingDanService {
 
     int insertDingDan(DingDan dingDan);
 
-    List<DingDan> selectDingDanByUname(String uname);
+    List<Order> selectDingDanByUname(Integer uid);
 
 
 }

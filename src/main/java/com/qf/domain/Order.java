@@ -1,10 +1,9 @@
 package com.qf.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
@@ -24,6 +23,6 @@ public class Order {
     @Column(name = "trad_cname")
     private String tradcname;
     @Column(name = "trad_time")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date tradtime;
 }
