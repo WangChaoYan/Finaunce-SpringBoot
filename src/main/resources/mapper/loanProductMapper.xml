@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.dao.LoanProductMapper">
+    <resultMap id="loanProduct" type="loanProduct">
+        <id column="loan_id" property="id"></id>
+        <result column="loan_rate" property="rate"></result>
+        <result column="loan_limit" property="limit"></result>
+    </resultMap>
+    <select id="loadLoanProduct" resultMap="loanProduct">
+        SELECT * FROM loan
+    </select>
+    <update id="updateLoanProduct" parameterType="loanProduct">
+        UPDATE loan SET loan_rate = #{rate},loan_limit = #{limit} WHERE loan_id =1
+    </update>
+</mapper>

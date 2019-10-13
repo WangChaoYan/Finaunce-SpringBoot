@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.dao.LoanOrderMapper">
+    <resultMap id="loanOrder" type="loanOrder">
+        <id column="loan_order_id" property="loanOrderId"></id>
+        <result column="loan_amount" property="loanAmount"></result>
+        <result column="loan_stage" property="loanStage"></result>
+        <result column="repayment_amount" property="repaymentAmount"></result>
+        <result column="user_bankcard_id" property="userBankcardId"></result>
+        <result column="loan_date" property="loanDate"></result>
+        <result column="uid" property="uid"></result>
+        <result column="status" property="status"></result>
+    </resultMap>
+    <select id="loadAllLoanOrder" resultMap="loanOrder">
+        select * from loan_order
+    </select>
+</mapper>

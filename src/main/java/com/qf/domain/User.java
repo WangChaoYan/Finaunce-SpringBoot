@@ -25,5 +25,5 @@ public class User {
     private String ujob;
     private Integer status;          //账户状态
     private String contact;          //联系人
-    private Date createtime;
+    private String createtime;
 }
