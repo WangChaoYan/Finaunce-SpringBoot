@@ -28,19 +28,19 @@ public class UserManageController {
     @Autowired
     private UserManageService userManageService;
 
-    //@RequiresPermissions(value = {"user"})
+    @RequiresPermissions(value = {"user"})
     @RequestMapping("/manageSelect/{page}/{size}")//全查，分页
     public ResponseUser manageSelect(@PathVariable("page")Integer page, @PathVariable("size")Integer size){//返回User
             return userManageService.findAll(page,size);
     }
 
-    //@RequiresPermissions(value = {"user"})//权限，使用user_insert,  还是user
+    @RequiresPermissions(value = {"user"})//权限，使用user_insert,  还是user
     @RequestMapping("/manageInsert")//新增
     public User manageInsert(@RequestBody User user){
             return userManageService.save(user);
     }
 
-    //@RequiresPermissions(value = {"user"})
+    @RequiresPermissions(value = {"user"})
     @RequestMapping("/manageDelete")//删除
     public String manageDelete(@RequestBody User user){
         System.out.println(user);
@@ -48,13 +48,13 @@ public class UserManageController {
         return  userManageService.managedelete(user);//返回一个删除成功
     }
 
-    //@RequiresPermissions(value = {"user"})
+    @RequiresPermissions(value = {"user"})
     @RequestMapping("/manageSelectById") //修改的查
     public User manageSelectById(@RequestBody User user){
         return  userManageService.selectById(user);
     }
 
-           //@RequiresPermissions(value = {"user"})
+    @RequiresPermissions(value = {"user"})
     @RequestMapping("/manageUpdate")//修改的改
     public User manageUpdate(@RequestBody User user){
        return userManageService.manageupdate(user);
@@ -78,7 +78,7 @@ public class UserManageController {
     //资金，去查询，资金表的金额，还有一个详细的资金出入表的记录，展示
 
 
-    //@RequiresPermissions(value = {"user"})
+    @RequiresPermissions(value = {"user"})
     @RequestMapping("/manageEAM")      //资金总额计算
     public ZiChan manageEAM(){//BigDecimal 钱的单位类型
 
