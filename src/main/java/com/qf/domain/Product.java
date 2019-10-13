@@ -1,27 +1,27 @@
 package com.qf.domain;
 
+import javax.persistence.*;
+
 import lombok.Data;
 
+
 /**
- * @author 小宝
- * @date 2019/9/30
- * @Time 15:25
+ * @Author 杨小柒丶
+ * @Date 2019/10/6
+ * @Time 22:20
  */
-
-
-//产品类
-
+@Entity
+@Table(name ="product")
 @Data
 public class Product {
-    private Integer pid;         //序号
-    private Integer id;          //产品id
-    private String pname;       //产品名称
-    private String pinfomation; //基础产品信息
-    private String rate;      //利率
-    private String days;      //周期
-    private Integer limits;    //限额
-    private Integer status;   //1理财  2投资
-    private String number;
-    private String address;
-    private String account;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer pid;
+    private Integer id;
+    private String pname;
+    private String pinfomation;
+    private Float rate;
+    private Integer days;
+    private Integer limits;
+    private Integer status;
 }

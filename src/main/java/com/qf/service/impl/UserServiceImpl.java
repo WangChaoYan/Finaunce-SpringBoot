@@ -12,6 +12,7 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -77,7 +78,10 @@ public class UserServiceImpl implements UserService {
         ByteSource credentialsSalt = ByteSource.Util.bytes(user.getUname());
         SimpleHash simpleHash = new SimpleHash(hashAlgorithName, password, credentialsSalt, hashIterations);
         user.setUpassword(simpleHash.toString());
-        user.setCreatetime(new Date());
+        Date date =new Date();
+        SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd");
+        String time = dateformat.format(date);
+        user.setCreatetime(time);
         user.setStatus(1);
         User save = userRepository.save(user);
         if(save!=null){

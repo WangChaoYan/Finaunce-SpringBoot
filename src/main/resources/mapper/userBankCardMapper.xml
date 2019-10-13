@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qf.dao.UserBankCardMapper">
+    <resultMap id="userBankCard" type="userBankCard">
+        <id property="bankCardId" column="bankcard_id"></id>
+        <result property="name" column="user_name"></result>
+        <result property="idCardCode" column="user_idCardCode"></result>
+        <result property="bankPreMobile" column="bankcard_bankPreMobile"></result>
+        <result property="userId" column="uid"></result>
+    </resultMap>
+    <insert id="addUserBankCard" parameterType="userBankCard">
+        INSERT INTO user_bankcard VALUES (#{bankCardId},#{name},#{idCardCode},#{bankPreMobile},#{userId})
+    </insert>
+    <select id="loadAllUserBankCard" resultMap="userBankCard">
+        SELECT * from user_bankcard
+    </select>
+</mapper>
