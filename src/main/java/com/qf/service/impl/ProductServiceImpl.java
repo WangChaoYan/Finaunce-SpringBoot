@@ -21,38 +21,7 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
     @Resource
     private ProductMapper productMapper;
-    @Override
-    public List<Product> FindAll() {
-        return  productDao.findAll();
-    }
 
-    @Override
-    public void del(Integer pid) {
-        productDao.deleteById(pid);
-    }
-
-    @Override
-    public Product add(Product product) {
-
-        return productDao.save(product);
-    }
-
-    @Override
-    public Product update(Product product)
-    {
-        return productDao.saveAndFlush(product);
-    }
-
-    @Override
-    public Product findById(Integer pid)
-    {
-        return productDao.findById(pid).get();
-    }
-
-    @Override
-    public List<Product> likeFind( Integer id) {
-        return productDao.findByIdLike(id);
-    }
     @Override
     public List<Product> selectProductByStatus(Integer status) {
         return productMapper.selectProductByStatus(status);
