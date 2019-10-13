@@ -65,8 +65,6 @@ public class ProductController {
     public List<Order> selectDingDanByUname(@RequestParam("uname")String  uname){
 
         User user=userRepository.findByUname(uname);
-        System.out.println(user.getUid());
-
         return dingDanService.selectDingDanByUname(user.getUid());
     }
 
