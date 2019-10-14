@@ -9,10 +9,8 @@
         <module name="Finaunce-SpringBoot" />
       </profile>
     </annotationProcessing>
-  </component>
-  <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="Finaunce-SpringBoot" options="-parameters" />
-    </option>
+    <bytecodeTargetLevel>
+      <module name="Finaunce-SpringBoot" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

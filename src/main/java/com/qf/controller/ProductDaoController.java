@@ -2,6 +2,8 @@ package com.qf.controller;
 
 import com.qf.domain.Product;
 import com.qf.service.ProductDaoService;
+import com.sun.xml.internal.rngom.parse.host.Base;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +18,7 @@ import java.util.List;
  * @Time 19:48
  */
 @RestController
-public class ProductDaoController {
+public class ProductDaoController extends BaseController {
     @Autowired
     private ProductDaoService productService;
 
@@ -45,5 +47,12 @@ public class ProductDaoController {
     @RequestMapping("/findByIdLike/{id}")
     public List<Product> findByIdLike(@PathVariable("id") Integer id){
         return productService.likeFind(id);
+    }
+
+
+    @RequiresPermissions(value = {"product"})
+    @RequestMapping("/permission")
+    public String permission(){
+        return "product";
     }
 }

@@ -59,11 +59,16 @@ public class UserController {
      */
     @RequestMapping(value = "/judgeTel",method = RequestMethod.POST)
     public String judgeTel(@RequestBody User user,HttpServletRequest request){
-        String utel=user.getUtel();
-        HttpSession session = request.getSession();
-        session.setAttribute("tel",utel);
-        String message = userService.judge(utel);
-        return message;
+        try{
+            String utel=user.getUtel();
+            HttpSession session = request.getSession();
+            session.setAttribute("tel",utel);
+            String message = userService.judge(utel);
+            return message;
+        }catch (Exception e){
+            System.out.println();
+        }
+        return null;
     }
 
 

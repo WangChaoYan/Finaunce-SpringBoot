@@ -9,6 +9,7 @@ import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,8 +17,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 
+import javax.servlet.Filter;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Configuration
@@ -27,10 +31,7 @@ public class ShiroConfig {
     @Bean
     public ShiroFilterFactoryBean shiroFilterFactoryBean(@Qualifier("defaultWebSecurityManager")DefaultWebSecurityManager defaultWebSecurityManager){
         ShiroFilterFactoryBean shiroFilterFactoryBean=new ShiroFilterFactoryBean();
-        //设置登陆页面
-        shiroFilterFactoryBean.setLoginUrl("/login");
-        //没有权限的页面
-        shiroFilterFactoryBean.setUnauthorizedUrl("/noPermission");
+
 
 //        //设置权限
 //        Map permission=new LinkedHashMap();
@@ -39,6 +40,12 @@ public class ShiroConfig {
 //        permission.put("/upd","perms[user_update]");
 //        permission.put("/sel","perms[user_select]");
 //        shiroFilterFactoryBean.setFilterChainDefinitionMap(permission);
+//设置自定义filter
+
+        //自定义过滤器
+        Map<String, Filter> filterMap = new LinkedHashMap<>();
+
+        shiroFilterFactoryBean.setFilters(filterMap);
 
         shiroFilterFactoryBean.setSecurityManager(defaultWebSecurityManager);
         return shiroFilterFactoryBean;
@@ -105,6 +112,8 @@ public class ShiroConfig {
         modularRealmAuthenticator.setAuthenticationStrategy(new AtLeastOneSuccessfulStrategy());
         return modularRealmAuthenticator;
     }
+
+
     /**
      * 开启Shiro注解(如@RequiresRoles,@RequiresPermissions),
      * 需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全逻辑验证

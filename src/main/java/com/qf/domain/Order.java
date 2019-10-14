@@ -2,6 +2,7 @@ package com.qf.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.persistence.*;
 import java.util.Date;

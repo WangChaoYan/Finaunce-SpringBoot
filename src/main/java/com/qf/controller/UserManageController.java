@@ -23,7 +23,7 @@ import java.util.Optional;
 
 
 @RestController
-public class UserManageController {
+public class UserManageController extends BaseController{
 
     @Autowired
     private UserManageService userManageService;
@@ -78,7 +78,7 @@ public class UserManageController {
     //资金，去查询，资金表的金额，还有一个详细的资金出入表的记录，展示
 
 
-    @RequiresPermissions(value = {"user"})
+
     @RequestMapping("/manageEAM")      //资金总额计算
     public ZiChan manageEAM(){//BigDecimal 钱的单位类型
 
@@ -112,4 +112,10 @@ public class UserManageController {
         return "success";
     }
 
+
+    @RequiresPermissions(value = {"user"})
+    @RequestMapping("/user")
+    public String user(){
+        return "user";
+    }
 }

@@ -70,7 +70,11 @@ public class AlipayController{
         if(order!=null){
             order.setTradstatus("支付完成");
         }
-        orderRepository.saveAndFlush(order);
+        try {
+            orderRepository.saveAndFlush(order);
+        }catch (Exception e){
+            System.out.println();
+        }
         List<Order> list = orderRepository.findAllByUid(1);
         return list;
     }
